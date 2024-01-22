@@ -48,7 +48,9 @@
 
         }
 
+        
         @media only screen and (min-width: 560px) {
+            
             h1 {
                 font-size: 1.4rem;
                 background-color: #ce289c;
@@ -59,7 +61,7 @@
             }
 
             .container {
-                display: block;
+                
                 margin: 1;
             }
 
@@ -69,6 +71,7 @@
             }
 
         }
+
 
         @media only screen and (min-width:768px) {
             h1 {
@@ -87,6 +90,8 @@
                 font-size: 2rem;
             }
         }
+
+        
 
         @media only screen and (min-width:1024px) {
             body {

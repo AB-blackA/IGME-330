@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Greeter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lemon&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-size: 1.5em;
+            font-family: 'Lemon', serif;
+        }
+
+
+        /* decleratively set the button's style */
+        button {
+            height: 50px;
+            width: 100px;
+            font-size: 14pt;
+        }
+    </style>
+    <script>
+
+        //following code until instructions done in class with instructor as a refresher on poor form
+        "use strict";
+
+        let a = 10;
+
+        function addThem(a, b) {
+            return a + b;
+        }
+
+        console.log(addThem(3, 4));
+
+
+        function doStuff() {
+            console.log("log end:", a, i);
+
+            if (true) {
+                if (true) {
+                    for (let i = 0; i < 10; i++) {
+                        let a = 10;
+                    }
+                }
+            }
+        }
+
+        //console.log("log end:", a, i);
+
+        // 1 - get a reference to the button
+        // 2 - add a click event to button that calls a `sayHello` function
+        // 3 - create a `sayHello()` function
+        // 3A - get name of person from the <input>
+        // 3B - get a reference to the #output <p>
+        // 3C - update HTML of #output <p>
+
+        //3
+        function sayHello() {
+            //3A, finds anything in the document
+            const firstName = document.querySelector("#input-firstname").value;
+            const lastname = document.querySelector("#input-lastname").value;
+
+            //check if firstName is null (after trimming excess spaces), set to Peter if so
+            if (!firstName.trim()) { firstName = "Peter"; }
+
+            //3B and 3C
+            //document.querySelector("#output").innerHTML = "Hello " + firstName + " " + lastname;
+            document.querySelector("#output").innerHTML = `Hello ${firstName} ${lastname}`;
+
+        }
+
+        
+
+        function greet(greeting) {
+            //3A, finds anything in the document
+            let firstName = document.querySelector("#input-firstname").value;
+            const lastname = document.querySelector("#input-lastname").value;
+
+            //check if firstName is null (after trimming excess spaces), set to Peter if so
+            if (!firstName.trim())  firstName = "Peter"; 
+
+            //3B and 3C
+            document.querySelector("#output").innerHTML = `${greeting} ${firstName} ${lastname}`;
+
+        }
+
+        function init() {
+            //1
+            const button = document.querySelector("button");
+            const button2 = document.querySelector("#btn-click2");
+
+            //2, two different ways to add a click event to the button
+
+            //note, use of parenthesis (sayHello()) would set the return value of sayHello to button.onclick, which is currently void 
+            //button.onclick = sayHello;
+
+            button.addEventListener("click", () => {greet("Hello")});
+            button2.addEventListener("click", () => {greet("Goodbye")});
+
+            //imperatively set paragraph red color text and yellow background
+            document.querySelector("#output").style.color = "red";
+            document.querySelector("#output").style.backgroundColor = "yellow";
+        }
+
+        //somehow this allows the "button clicking" code to work by waiting for the whole page to load.
+        //i don't understand why the function operates though; why can I click the button? isn't it wrapped
+        //in the code?
+        window.onload = init;
+
+
+    </script>
+</head>
+
+<body>
+    <button>Click Me!</button>
+    <button id = "btn-click2">Click Me2!</button>
+    <input id="input-firstname" placeholder="Type in your first name">
+    <input id="input-lastname" placeholder="Type in your last name">
+    <p id="output">???</p>
+
+
+</body>
+
+</html>

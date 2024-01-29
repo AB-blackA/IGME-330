@@ -27,32 +27,39 @@
 
 	function loadTextXHR(){
 
-		const url = "data/pet-names.txt";
+		const url = "data/pet-names.csv";
 		const xhr = new XMLHttpRequest();
 
 		xhr.onload = (e) => {
 			console.log(`In onload - HTTP Status Code = ${e.target.status}`);
 			const text = e.target.responseText;
 			console.log(`Success - the file length is ${text.length}`);
+			/* const lines = text.split("\n");
+			const dogNames = lines[0].split(",");
+			const catNames = lines[1].split(","); */
+
+			// array destructuring
+			let [dogNames,catNames,birdNames] = text.split("\n");
+			dogNames = dogNames.split(",");
+			catNames = catNames.split(",");
+			birdNames = birdNames.split(",");
 			
-			const words = text.split(",");
+			// bird names
+			//const birdNames = lines[2].split(",");
 
-			//turn array into HTML
-			//1. long way
-			/* let html = "<ol>";
+			const dogHtml = `<ol>${dogNames.map(w => `<li>${w}</li>`).join("")}</ol>`;
+			const catHtml = `<ol>${catNames.map(w => `<li>${w}</li>`).join("")}</ol>`;
+			const birdHtml = `<ol>${birdNames.map(w => `<li>${w}</li>`).join("")}</ol>`;
 			
-				for(let w of words){
-					html += `<li>${w}</li>`;
-				}
+			const html = `
+				<h3>Dog Names</h3>
+				${dogHtml}
+				<h3>Cat Names</h3>
+				${catHtml}
+				<h3>Bird Names</h3>
+				${birdHtml}
+			`
 
-			html += "</ol>";
-			document.querySelector("#output").innerHTML = html; */
-
-			//2. one liner my attempt (doesn't break the lines on web page)
-			//document.querySelector('#output').innerHTML = "<ol>" + words.join('\n') + "</ol>";
-		
-			//2. one liner (tutorial)
-			const html = `<ol>${words.map(w => `<li>${w}</li>`).join("")}</ol>`;
 			document.querySelector("#output").innerHTML = html;
 		};
 

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<title>XHR - Helper Function</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>XHR - Helper Function</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 </head>
+
 <body>
-	<header class="hero is-medium is-primary is-bold">
+  <header class="hero is-medium is-primary is-bold">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">XHR - Helper Function</h1>
@@ -15,46 +17,128 @@
       </div>
     </div>
   </header>
-	
-	<div class="columns section has-background-light">
-		<div class="column">
-			<button id="button-1" class="button is-info is-large">Load Taffy Info</button>
-		</div>
-		
-		<div class="column">
-			<button id="button-2" class="button is-info is-large">Load Viking Info</button>
-		</div>
-	</div>
 
-	<div class="columns section  has-text-primary-light has-background-dark">
-		<div id="output-1" class="column is-size-4">Click button to load Taffy Info</div>
-		<div id="output-2" class="column is-size-4">Click button to load Viking Info</div>
-	</div>
-	
+  <div class="columns section has-background-light">
+    <div class="column">
+      <button id="taffy-button" class="button is-info is-large">Load Taffy Info</button>
+    </div>
+
+    <div class="column">
+      <button id="viking-button" class="button is-info is-large">Load Viking Info</button>
+    </div>
+  </div>
+
+  <div class="columns section  has-text-primary-light has-background-dark">
+    <div id="taffy-output" class="column is-size-4">Click button to load Taffy Info</div>
+    <div id="viking-output" class="column is-size-4">Click button to load Viking Info</div>
+  </div>
+
+
+  <script>
+    // Your code goes here
+    /*
+    1) Find a partner and get the basics working - load in the applicable text file when a button is clicked,
+    and update the relevant div with the taffy or viking text
+  
+    2) After you get that working - think about 
+    
+    A) Create a reusable helper function:
+       function loadTextXHR(url,callback){}  // accepts a url and a callback function
+  
+    B) Call this function like so when the taffy button is clicked:
+  
+    loadTextXHR("data/taffy-facts.txt", taffyCallback);
+  
+    C) Implement function taffyCallback(){} - this function updates the taffy <div>
+  
+    D) Then do the same for the viking button and viking <div>
+    
+    */
+
+    //My attempt. Loads in text for Taffy but has issues. Buttons don't work (onclick is null?)
+    //possibly because script was outside of body lmao
+    /* const taffyCallback = (stringOutput) => {
+  
+      document.querySelector("#taffy-output").innerHTML = stringOutput;
+  
+    };
+  
+    const vikingCallback = (stringOutput) => {
+  
+      document.querySelector("#viking-output").innerHTML = stringOutput;
+    };
+  
+    const loadTextXHR = (url, callback) => {
+  
+      //confirm the way I'm structuring the function delegate works
+      //console.log(url);
+  
+  
+      const xhr = new XMLHttpRequest();
+  
+      xhr.onload = (e) => {
+        //call logs for HTTP status for errors
+        console.log(`In onload - HTTP Status Code = ${e.target.status}`);
+        const text = e.target.responseText;
+        console.log(`Success - the file length is ${text.length}`);
+  
+        const words = text.split(",")
+  
+        callback(`<ol>${words.map(w => `<li>${w}</li>`).join("")}</ol>`);
+      }
+  
+      xhr.onerror = e => console.log('In onerror - HTTP Status Code = ${e.target.status}');
+      xhr.open("GET", url);
+      xhr.send();
+  
+    }
+  
+    document.querySelector("taffy-button").onclick = loadTextXHR("data/taffy-facts.txt", taffyCallback);
+    document.querySelector("viking-button").onclick = loadTextXHR("data/viking-facts.txt", vikingCallback);
+  
+   */
+
+    //class tutorial
+
+    //our callback functions. they accept argument e from xhr.onload in loadXmlHXR.
+    const taffyCallback = (e) => {
+
+      document.querySelector("#taffy-output").innerHTML = e.target.responseText;
+    }
+
+    const vikingCallback = (e) => {
+
+      document.querySelector("#viking-output").innerHTML = e.target.responseText;
+    }
+
+    function loadXmlXHR(url, callback) {
+
+      //all necessary declerations for creating an XMLHttpRequest
+    
+      const xhr = new XMLHttpRequest();
+
+      //how does xhr get the response text form url? is this function being called up .send() and therefor is only loaded in now?
+      xhr.onload = callback;
+
+      //error code if url doesn't load in correctly?
+      xhr.onerror = e => console.log('In onerror - HTTP Status Code = ${e.target.status}');
+
+      //presumably get is a command or function?
+      xhr.open("GET", url);
+      xhr.send();
+
+    }
+
+    //notice for how we're passing in a function that requires parameters, we need to set up the "arrow function" decleration
+    document.querySelector("#taffy-button").onclick = () => loadXmlXHR("data/taffy-facts.txt", taffyCallback);
+    document.querySelector("#viking-button").onclick = () => loadXmlXHR("data/viking-facts.txt", vikingCallback);
+
+
+
+
+  </script>
+
 </body>
-<script>
-	// Your code goes here
-  /*
-  1) Find a partner and get the basics working - load in the applicable text file when a button is clicked,
-  and update the relevant div with the taffy or viking text
-
-  2) After you get that working - think about 
-  
-  A) Create a reusable helper function:
-     function loadTextXHR(url,callback){}  // accepts a url and a callback function
-
-  B) Call this function like so when the taffy button is clicked:
-
-  loadTextXHR("data/taffy-facts.txt", taffyCallback);
-
-  C) Implement function taffyCallback(){} - this function updates the taffy <div>
-
-  D) Then do the same for the viking button and viking <div>
-  
 
 
-
-
-  */
-</script>
 </html>

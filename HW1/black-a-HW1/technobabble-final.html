@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Technobabble Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale-1, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+
+
+    <script type="module">
+        import {outputTechnoBabble} from "./src/main.js";
+
+        window.outputTechnoBabble = outputTechnoBabble;
+    </script>
+
+
+</head>
+
+<body>
+    <h1>Technobabble Generator</h1>
+    <div class="container">
+        <p id="output">Loading...</p>
+        <!-- both buttons pass a param equal to the amount of babble needed to be output -->
+        <button id="generate-babble-button" onclick="outputTechnoBabble(1)">More Technobabble!</button>
+        <button id="generate-babble-five-button" onclick="outputTechnoBabble(5)">Even MORE Technobabble!</button>
+    </div>
+
+</body>
+
+
+</html>

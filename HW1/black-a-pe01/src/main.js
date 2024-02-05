@@ -28,7 +28,7 @@ const outputTechnoBabble = (numBabble) => {
 
     }
 
-    document.getElementById("output").innerText = output;
+    document.querySelector("#output").innerText = output;
 
 }
 

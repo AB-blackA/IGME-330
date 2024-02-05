@@ -1,10 +1,15 @@
 import { randomElement } from "./utils.js";
 
+/* arrays for holding words from technobabble json file */
+
 let words1 = [];
 let words2 = [];
 let words3 = [];
 
-//returns a random word from the array
+/* Method: getRandomBabble
+ * Params: array (takes an above word array)
+ * Purpose: returns an element from a word array (i.e., a string, or random babble)
+ */
 const getRandomBabble = (array) => {
 
     //random

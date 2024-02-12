@@ -67,12 +67,126 @@
             document.querySelector("#cb-lines").checked = true;
 
 
+
+            //draw the default images (from previous iterations of this assignment)
+            drawDefaultImage();
+
             //call setupUI helper function
             setupUI();
 
-
             //drawing random rectangles
             update();
+
+            function drawDefaultImage() {
+                // C - all fill operations are now in red
+                //ctx.fillStyle = "red";
+                // D - fill a rectangle with the current fill color
+                //"convinience method"
+                //ctx.fillRect(20, 20, 600, 440);
+
+                drawRectangle(ctx, 20, 20, 600, 440, "red", undefined, undefined);
+
+                //rect()
+
+                /*  ctx.strokeStyle = "blue";
+                 ctx.lineWidth = 3;
+                 ctx.beginPath(); //start path of rectangle
+                 ctx.rect(120, 120, 400, 300); //define boundaries
+                 ctx.closePath(); //close path of ractangle
+                 ctx.stroke(); */
+
+                drawRectangle(ctx, 120, 120, 400, 300, "red", 3, "blue");
+
+                //lines
+
+                /* ctx.strokeStyle = "green";
+                ctx.lineWidth = 20;
+                ctx.beginPath();
+                ctx.moveTo(20, 20); //define start of line at 20,20. notably, where the rectangle starts
+                ctx.lineTo(620, 460); //define end point of line
+                ctx.closePath();
+                ctx.stroke(); */
+
+                drawLine(ctx, 20, 20, 620, 460, 20, "green");
+
+                //drawing another line. Note that not closing the last path can create some odd drawings
+                /* ctx.beginPath();
+                ctx.moveTo(620, 20);
+                ctx.lineTo(20, 460);
+                ctx.stroke();
+                ctx.closePath(); */
+
+                drawLine(ctx, 620, 20, 20, 460, 20, "green");
+
+                //circle, to be a happy face (:))
+
+                /* ctx.strokeStyle = "magenta";
+                ctx.lineWidth = 5;
+                ctx.fillStyle = "yellow";
+                ctx.beginPath();
+                //x, y, radius, startingAngle, endingAngle. math.pi*2 makes a circle.
+                ctx.arc(320, 240, 50, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+                */
+
+                drawArc(ctx, 320, 240, 50, "yellow", 5, "magenta", 0, Math.PI * 2);
+
+
+                //semi-circle
+                /* ctx.strokeStyle = "red";
+                ctx.lineWidth = 5;
+                ctx.fillStyle = "pink";
+                ctx.beginPath();
+                //x, y, radius, startingAngle, endingAngle
+                ctx.arc(320, 240, 30, 0, Math.PI);
+                ctx.closePath();
+
+                ctx.fill();
+                ctx.stroke(); */
+
+                drawArc(ctx, 320, 240, 30, "pink", 5, "red", 0, Math.PI);
+
+                //PE-04 pt 2 FINISHING THE HAPPY FACE
+
+               /*  ctx.strokeStyle = "brown";
+                ctx.lineWidth = 3;
+                ctx.fillStyle = "white";
+                ctx.beginPath();
+
+                //note, it's here I find that the origin of the canvas is the top left
+                ctx.arc(300, 220, 10, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke(); */
+
+                drawArc(ctx, 300, 220, 10, "white", 3, "brown", 0, Math.PI * 2);
+
+                /* ctx.strokeStyle = "brown";
+                ctx.lineWidth = 3;
+                ctx.fillStyle = "white";
+                ctx.beginPath();
+                ctx.arc(340, 220, 10, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke(); */
+
+                
+                drawArc(ctx, 340, 220, 10, "white", 3, "brown", 0, Math.PI * 2);
+
+                //PE04 pt2b DRAWING A LINE
+
+                /* ctx.strokeStyle = "pink";
+                ctx.lineWidth = 20;
+                ctx.beginPath();
+                ctx.moveTo(20, 180); //define start of line at
+                ctx.lineTo(620, 180); //define end point of line
+                ctx.closePath();
+                ctx.stroke(); */
+
+                drawLine(ctx, 20, 180, 620, 180, 20, "pink");
+            }
 
 
         }
@@ -182,7 +296,8 @@
 
             ctx.save();
             //global alpha vars modified to allow better visibility of screensaver. is revereted at end of function
-            ctx.globalAlpha = .3;
+            //removed due to messing with starting image
+            //ctx.globalAlpha = .3;
             ctx.fillStyle = fillStyle;
             ctx.beginPath();
             ctx.arc(x, y, radius, startAngle, endAngle);

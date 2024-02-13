@@ -247,7 +247,8 @@
 
 
             // params: drawRectangle(ctx,x,y,width,height,fillStyle="black",lineWidth=0,strokeStyle="black")
-            drawRectangle(ctx, getRandomInt(0, 640), getRandomInt(0, 480), getRandomInt(10, 90), getRandomInt(10, 90), getRandomColor(), getRandomInt(2, 12), getRandomColor());
+            //cut y directions in half as fulfillment to part 3 of assignment
+            drawRectangle(ctx, getRandomInt(0, 320), getRandomInt(0, 240), getRandomInt(10, 90), getRandomInt(10, 90), getRandomColor(), getRandomInt(2, 12), getRandomColor());
 
 
         }

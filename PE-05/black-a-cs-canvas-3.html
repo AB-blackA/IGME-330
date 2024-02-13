@@ -19,6 +19,8 @@
         // #1 call the `init` function after the pages loads
         window.onload = init;
 
+        let ctx;
+
         function init() {
             console.log("page loaded!");
             // #2 Now that the page has loaded, start drawing!
@@ -27,7 +29,7 @@
             let canvas = document.querySelector("canvas");
 
             // B - the `ctx` variable points at a "2D drawing context". ctx = context
-            const ctx = canvas.getContext("2d");
+            ctx = canvas.getContext("2d");
 
             // C - all fill operations are now in red
             ctx.fillStyle = "red";
@@ -131,7 +133,7 @@
             ctx.stroke();
 
             //drawing random rectangles
-            update(ctx);
+            update();
 
         }
 
@@ -149,9 +151,9 @@
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
 
-        function update(ctx){
+        function update(){
 
-            requestAnimationFrame(update(ctx));
+            requestAnimationFrame(update);
             drawRandomRect(ctx);
 
         }
@@ -163,7 +165,8 @@
             ctx.lineWidth = getRandomInt(2,12);
 
             ctx.beginPath();
-            ctx.rect(getRandomInt(0,640),getRandomInt(0,480),getRandomInt(10,90),getRandomInt(10,90));
+            //cut y directions in half as fulfillment to part 3 of assignment
+            ctx.rect(getRandomInt(0,320),getRandomInt(0,240),getRandomInt(10,90),getRandomInt(10,90));
 
             ctx.closePath();
             ctx.fill();

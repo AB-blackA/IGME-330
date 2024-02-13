@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Drawin'!</title>
+    <style>
+        canvas {
+            border: 2px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="640" height="480"></canvas>
+    <script>
+        let ctx = document.querySelector('canvas').getContext('2d');
+        ctx.save();                 // A - optionally, save the drawing state attributes and CTM
+        ctx.strokeStyle = "red";    // B - optionally, change the values of one or more drawing state attributes
+        ctx.fillStyle = "yellow";   // B
+        ctx.lineWidth = 10;       // B
+        ctx.lineJoin = "round";
+        //ctx.setLineDash([5,15]); //5 pixels line, 15 pixels blanks
+        ctx.beginPath();            // C - describe a path
+        //ctx.rect(20,20,200,200);    // C
+        /* ctx.arc(200, 200, 125, 0, Math.PI * 2, false); // draws a circle at 200,200 with a 125-pixel radius
+        ctx.arc(200, 200, 100, 0, Math.PI * 2, true); // makes a "ring" by drawing counter-clockwise within the old fcircle */
+        /* ctx.moveTo(20, 100);  	// start the "pen" at x=20, y=100 
+        ctx.lineTo(620, 100); 	// point #1 -> draw line to x=620, y=100
+        ctx.lineTo(340, 400);	// point #2 -> draw line to x=340, y=400 */
+        ctx.moveTo(50, 100);             	// P0
+        ctx.arcTo(300, 425, 550, 100, 80); 	// P1, P2 and the radius
+        ctx.lineTo(550, 100);               // top line: line segment between P0 & P2     
+        ctx.closePath();            // C
+        ctx.stroke();               // D - draw! i.e. make the path visible
+        ctx.fill();                 // D - swap the order of stroke() and fill() to see what happens to the drawing
+        ctx.restore();              // E - optionally, restore the saved values of drawing state attributes and CTM
+    </script>
+</body>
+
+</html>

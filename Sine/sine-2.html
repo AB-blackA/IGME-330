@@ -9,7 +9,10 @@
 	const canvasWidth = 400, canvasHeight = 300;
 	let ctx;
 
+	//"sine" vars
 	let x = 0; let y = 0;
+	let angle = 0;
+	const fps = 15;
 
 	window.onload = init;
 
@@ -24,7 +27,37 @@
 	//creation of values for sine waves to be at
 	function loop(){
 
-		let angle = 0;
+		//compared to setAnimationFrame (calls 60 times a second), setTimeout allows us to specifiy (in microseconds)
+		setTimeout(loop, 1000/fps);
+
+		ctx.save();
+		ctx.fillStyle = "black";
+		ctx.globalAlpha = 1/fps;
+		ctx.fillRect(0,0,canvasWidth, canvasHeight);
+		ctx.restore();
+
+
+		x += 10;
+		angle += .3;
+		y = canvasHeight/2 + Math.sin(angle) * 100;
+
+		//drawCircle(ctx,x,y,radius,color)
+		drawCircle(ctx, x, y, 2, "white");
+
+		//cosine wave!
+		y = canvasHeight/2 + Math.cos(angle) * 100;
+		//drawCircle(ctx,x,y,radius,color)
+		drawCircle(ctx, x, y, 4, "red");
+
+		//"shark tooth" pattern
+		y = canvasHeight/2 - Math.sqrt(x%50) * 5;
+		//drawCircle(ctx,x,y,radius,color)
+		drawCircle(ctx, x, y, 4, "yellow");
+
+		if( x > canvasWidth) x = 0;
+
+
+		/* let angle = 0;
 		let increase = Math.PI * 2 /100;
 
 		for(let i = 0; i < 1; i += .01){
@@ -37,7 +70,7 @@
 			drawCircle(ctx, x*canvasWidth, (y*100) + canvasHeight/2, 2, "white"); //x, y, need multiplication or else they don't move enough
 
 			angle += increase;
-		}
+		} */
 
 	}
 

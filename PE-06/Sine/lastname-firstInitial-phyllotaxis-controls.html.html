@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Sine Start</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+
+        .container {
+            width: 70%;
+            margin: 12 auto;
+        }
+
+
+        #dropdown-color {
+            margin-top: 10px;
+            margin-left: 77px;
+        }
+
+        #dropdown-angle-mod {
+            
+            margin-top: 10px;
+            margin-left: 170px;
+        }
+
+        
+
+    </style>
+    <script>
+        "use strict";
+        const canvasWidth = 400, canvasHeight = 300;
+        let ctx;
+
+        //"loop" counter. default zero
+        let n = 0;
+        const nDefault = 0;
+
+        //scaling param
+        const c = 4;
+        const divergence = 137.5;
+
+        //const value of dropdown fields for user chosen color and angle modifier, will be initalized in init
+        //after html loads in. unlike the btn, this gets checked a lot more often, hence the var
+        let colorDropdownField;
+        let angleModDropdownField;
+
+
+        window.onload = init;
+
+        function init() {
+
+            //create canvas
+            ctx = canvas.getContext("2d");
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+
+            //rect defaults to top left of screen
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+            //set some data for our html elements
+            document.querySelector("#btn-reset").onclick = resetCanvas;
+            colorDropdownField = document.querySelector("#dropdown-color");
+            angleModDropdownField = document.querySelector("#dropdown-angle-mod");
+
+            loop();
+        }
+
+        function loop() {
+
+            //consts for calculations 
+            const circleRadius = 2;
+            const canvasMidX = canvasWidth / 2;
+            const canvasMidY = canvasHeight / 2;
+
+            //fps for our timeout, i.e. how often we are calling this function!
+            const fps = 1000 / 60;
+
+            //grab whatever text is in the input field. we'll check the color in a later function
+            let userColor = colorDropdownField.value;
+
+            setTimeout(loop, fps);
+
+            // each frame draw a new dot
+            // `a` is the angle
+            // `r` is the radius from the center (e.g. "Pole") of the flower
+            // `c` is the "padding/spacing" between the dots
+
+            //note that the angleModDropdownField.value is picked our from the HTML dropdown field;
+            //values range currently from 1 - 4 (all ints. who knows, maybe one day I'll make the parseFloat
+            //do its work)
+            let a = n* parseFloat(angleModDropdownField.value)  * dtr(divergence);
+            let r = c * Math.sqrt(n);
+
+            //now calculate x and y
+            let x = r * Math.cos(a) + canvasMidX;
+            let y = r * Math.sin(a) + canvasMidY;
+
+            //some unused variations for deciding color
+            /* let aDegrees = (n * divergence) % 361;
+            let color = `hsl(${aDegrees},100%,50%)`; */
+
+            //parse the userColor and determine what color the dots will be
+            let color = determineColor(userColor);
+
+            //draw the dot, then increase the counter!
+            drawCircle(ctx, x, y, circleRadius, color);
+            n++;
+        }
+
+
+        // helpers
+        function dtr(degrees) {
+            //not magic, this returns radians
+            return degrees * (Math.PI / 180);
+        }
+
+        function drawCircle(ctx, x, y, radius, color) {
+
+            //consts for arc creation
+            const startAngle = 0;
+            const endAngle = Math.PI * 2;
+
+            ctx.save();
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, endAngle);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+        }
+
+        function determineColor(userColor) {
+
+            if (userColor == "rainbow") {
+
+                //as part of the tutorial, this changes the color based off our scaling counter 'n'
+                //what the magic numbers are for specifically i'm unsure, my guess only guess
+                //is 5 is abritrary and 361 is due to the radius of a circle
+                return `hsl(${n / 5 % 361},100%,50%)`;
+            }else{
+
+                return userColor;
+            }
+
+        }
+
+
+        //"resets" the canvas via adding a new black rectangle
+        //and defaulting value of n
+        function resetCanvas() {
+
+            //rect defaults to top left of screen
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+            n = nDefault;
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="container">
+        <button id="btn-reset">Reset Canvas</button>
+        <!-- user control for Part 3: allow user to change the color of the created arcs-->
+        <select id="dropdown-color">
+            <!-- in JS value is grabbed to change color of created arcs-->
+            <option value="rainbow">Default (Rainbow)</option>
+            <option value="red">Red</option>
+            <option value="orange">Orange</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="indigo">Indigo</option>
+            <option value="violet">Violet</option>
+        </select>
+        <label>Color Changer</label>
+    </div>
+
+    <!-- changes for Part 2, originally I changed the Angle Mod in JS but opted -->
+    <!-- instead to allow that change to be made by the user-->
+    <div class="container">
+        <select id="dropdown-angle-mod">
+            <!--value is grabbed in JS and is used to change angle of arc creation-->
+            <option value="1">Default (1)</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+        <label>Angle Modifier</label>
+    </div>
+
+</body>
+
+</html>

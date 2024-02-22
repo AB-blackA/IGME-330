@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Destructuring Assignment Demo</title>
+	<style>
+	canvas{
+		border:1px solid gray;
+	}
+	</style>
+	<script>
+		"use strict";
+		const orderTaco = (type,size,price,meat,cheese,supreme,spicy,glutenFree) => {
+			console.log("Taco order: ", type,size,price,meat,cheese,supreme,spicy,glutenFree);
+		};
+
+		//just need to add `{...}` around the parameter list
+		const orderTaco2 = ({type,size,price,meat,cheese,supreme,spicy,glutenFree}) => {
+			console.log(`Taco order: type=${type}, size=${size}, price=${price}, meat=${meat}, cheese=${cheese},  supreme=${supreme}, spicy=${spicy}, glutenFree=${glutenFree}`);
+		};
+
+
+		const init = () => {
+
+			// https://github.com/tonethar/IGME-330-Spring-2023/blob/main/notes/more-js.md#ii-object-destructuring
+			// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#object_destructuring
+			
+			const user = {
+				id: 42,
+				isVerified: true,
+			};
+
+			// #1 - destructuring assignment
+			const { id, isVerified } = user;
+
+			console.log(id); // 42
+			console.log(isVerified); // true
+
+
+		// #2 - OR, if the variables have already been previously declared, we'll need to wrap parentheses around the destructuring assignment
+			
+		// const user = {
+		// 	id: 42,
+		// 	isVerified: true,
+		// };
+
+		// let id, isVerified;
+		// ({ id, isVerified } = user);
+
+		// console.log(id); // 42
+		// console.log(isVerified); // true
+
+
+
+
+
+
+
+			// #3 - Once you get up to 5 or more parameters in a function, getting the order right can get problematic - see below:
+
+			// Lot's of parameters - what is the order of the last 3 booleans again?
+			//orderTaco("Extreme","Large",9.99,"Chicken","mex-mix",true,true,false);
+
+			// #4 - Destructuring assignment to the rescue!
+			// and instead of 7 parameters, here we pass in a single object literal as a parameter
+			// which means that our parameters are each individually *named*
+			// which also means that the parameter *order* does not matter!
+			// which one is easier to read?
+
+			orderTaco2({
+				type: "Extreme",
+				size: "Large",
+				price: 9.99,
+				meat: "Chicken",
+				cheese: "mex-mix",
+				supreme: true,
+				spicy: true,
+				glutenFree: false});
+		
+		};
+		
+		window.onload = init;
+	</script>
+</head>
+<body>
+	<h1>Destructuring assignment demo</h1>
+	<h2>Look in the console</h2>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Sprites Start</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+
+
+        "use strict";
+
+        const canvasWidth = 640, canvasHeight = 480;
+
+        let ctx;
+
+        let sprites = [];
+
+        class CircleSprite {
+            static type = "arc"; // demoing a static (class) variable here
+
+            //curly braces expects an object to be passed in
+            constructor({x, y, radius=120, color}) {
+                console.log(`${this.constructor.type} created`); // access static property (alternatively, CircleSprite.type)
+                // YOU DO THIS - initialize .x, .y, .radius and .color properties
+                
+                //"manual" way
+                /* this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color; */
+
+                //simple way!
+                Object.assign(this, {x, y, radius, color});
+            }
+
+            update() {
+                // YOU DO THIS - increase the .x, and .y properties by 1
+                this.x++;
+                this.y++;
+            }
+
+            draw(ctx) {
+                // YOU DO THIS 
+                // fill a circle - utilize the ctx argument, and the .x, .y, .radius and .color properties
+                // don't forget about ctx.save() and ctx.restore()
+                ctx.save();
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+
+        const loop = () => {
+
+
+            setTimeout(loop, 1000 / 60);
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+            for(let i = 0; i < sprites.length; i++){
+                sprites[i].update();
+                sprites[i].draw(ctx);
+
+                if(sprites[i].x > canvasWidth){
+                    sprites[i].x = 0;
+                }
+
+                if(sprites[i].y > canvasHeight){
+                    sprites[i].y = 0;
+                }
+            }
+
+        }
+
+        const init = () => {
+            ctx = canvas.getContext("2d");
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+            sprites.push(new CircleSprite({x:100,y:100,undefined,color:"green"}));
+            sprites.push(new CircleSprite(100,200,30,"red"));
+            loop();
+        };
+        window.onload = init;
+
+    </script>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+</body>
+
+</html>

@@ -16,12 +16,16 @@ const drawParams = {
   showGradient: true,
   showBars: true,
   showCircles: true,
-  showNoise: false
+  showNoise: false,
+  showInvert: false,
+  showEmboss: false
 };
 
 // 1 - here we are faking an enumeration
 const DEFAULTS = Object.freeze({
-  sound1: "media/New Adventure Theme.mp3"
+  sound1: "media/New Adventure Theme.mp3",
+  sound2: "media/Peanuts Theme.mp3",
+  sound3: "media/The Picard Song.mp3"
 });
 
 function init() {
@@ -37,6 +41,8 @@ function init() {
   document.querySelector("#cb-bars").checked = drawParams.showBars;
   document.querySelector("#cb-circles").checked = drawParams.showCircles;
   document.querySelector("#cb-gradient").checked = drawParams.showGradient;
+  document.querySelector("#cb-invert").checked = drawParams.showInvert;
+  document.querySelector("#cb-emboss").checked = drawParams.showEmboss;
   
   loop();
 }
@@ -124,8 +130,17 @@ function setupUI(canvasElement) {
   document.querySelector("#cb-gradient").onclick = function (e) {
     drawParams.showGradient = e.target.checked;
   };
+
   document.querySelector("#cb-noise").onclick = function (e) {
     drawParams.showNoise = e.target.checked;
+  };
+  
+  document.querySelector("#cb-emboss").onclick = function (e) {
+    drawParams.showEmboss = e.target.checked;
+  };
+  
+  document.querySelector("#cb-invert").onclick = function (e) {
+    drawParams.showInvert = e.target.checked;
   };
 } // end setupUI
 

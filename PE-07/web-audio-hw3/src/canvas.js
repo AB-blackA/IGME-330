@@ -118,6 +118,16 @@ function draw(params = {}) {
     let length = data.length;
     let width = imageData.width;
 
+
+    // emboss?
+    if (params.showEmboss) {
+        //note we are stepping through *each* sub-pixel
+        for (let i = 0; i < length; i++) {
+            if (i % 4 == 3) continue; //skip alpha channel
+            data[i] = 127 + 2 * data[i] - data[i + 4] - data[i + width * 4];
+        }
+    }
+
     // B) Iterate through each pixel, stepping 4 elements at a time (which is the RGBA for 1 pixel)
     for (let i = 0; i < length; i += 4) {
 
@@ -131,10 +141,22 @@ function draw(params = {}) {
             // data[i+3] is the alpha channel
 
             // zero out the red and green and blue channels
-            data[i] = data[i+1] = data[i+2] = 0;
+            data[i] = data[i + 1] = data[i + 2] = 0;
             data[i] = 255;// make the red channel 100% red
         } // end if
+
+        // invert?
+        if (params.showInvert) {
+            let red = data[i], green = data[i + 1], blue = data[i + 2];
+            data[i] = 255 - red; //set red
+            data[i + 1] = 255 - green; // set green
+            data[i + 2] = 255 - blue //set blue
+            //data[i+3] is the alpha, but we're leaving that alone
+        }
+
+
     } // end for
+
 
     // D) copy image data back to canvas
     ctx.putImageData(imageData, 0, 0);

@@ -104,6 +104,7 @@ function setupUI(canvasElement) {
 
   // E - setup checkboxes
   // set onclicks of our checkboxes to modify values of drawParams object
+  // also during setup change defaults to be checked, except for noise
   document.querySelector("#cb-bars").onclick = function (e) {
     drawParams.showBars = e.target.checked;
   };
@@ -118,6 +119,11 @@ function setupUI(canvasElement) {
   document.querySelector("#cb-noise").onclick = function (e) {
     drawParams.showNoise = e.target.checked;
   };
+
+  document.querySelector("#cb-bars").checked = true;
+  document.querySelector("#cb-circles").checked = true;
+  document.querySelector("#cb-gradient").checked = true;
+  document.querySelector("#cb-noise").checked = false;
 } // end setupUI
 
 function loop() {

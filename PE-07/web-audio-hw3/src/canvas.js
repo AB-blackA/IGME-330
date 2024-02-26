@@ -141,8 +141,18 @@ function draw(params = {}) {
             // data[i+3] is the alpha channel
 
             // zero out the red and green and blue channels
+            // data[i] = data[i + 1] = data[i + 2] = 0;
+            // data[i] = 255;// make the red channel 100% red
+
+            // per assignment, changing the "noise" to be a different color than red
+            // currently shows yellow
+            // zero out the red and green and blue channels
             data[i] = data[i + 1] = data[i + 2] = 0;
-            data[i] = 255;// make the red channel 100% red
+
+            //create a yellow color for the noise
+            data[i] = 255;
+            data[i + 1] = 255;
+            data[i + 2] = 205;
         } // end if
 
         // invert?

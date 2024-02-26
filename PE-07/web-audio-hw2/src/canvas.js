@@ -18,7 +18,7 @@ function setupCanvas(canvasElement,analyserNodeRef){
 	canvasWidth = canvasElement.width;
 	canvasHeight = canvasElement.height;
 	// create a gradient that runs top to bottom
-	gradient = utils.getLinearGradient(ctx,0,0,0,canvasHeight,[{percent:.8,color:"purple"}, {percent:1,color:"magenta"}]);
+	gradient = utils.getLinearGradient(ctx,0,0,0,canvasHeight,[{percent:.5,color:"purple"}, {percent:1,color:"magenta"}]);
 	// keep a reference to the analyser node
 	analyserNode = analyserNodeRef;
 	// this is the array where the analyser data will be stored

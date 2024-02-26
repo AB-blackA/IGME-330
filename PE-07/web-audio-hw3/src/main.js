@@ -31,6 +31,13 @@ function init() {
   let canvasElement = document.querySelector("canvas"); // hookup <canvas> element
   setupUI(canvasElement);
   canvas.setupCanvas(canvasElement, audio.analyserNode);
+
+  //ensure initial state of cb's are what the assignment asks for
+  document.querySelector("#cb-noise").checked = drawParams.showNoise;
+  document.querySelector("#cb-bars").checked = drawParams.showBars;
+  document.querySelector("#cb-circles").checked = drawParams.showCircles;
+  document.querySelector("#cb-gradient").checked = drawParams.showGradient;
+  
   loop();
 }
 

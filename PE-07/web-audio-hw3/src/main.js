@@ -16,7 +16,7 @@ const drawParams = {
   showGradient: true,
   showBars: true,
   showCircles: true,
-  showNoise: true
+  showNoise: false
 };
 
 // 1 - here we are faking an enumeration
@@ -104,6 +104,8 @@ function setupUI(canvasElement) {
 
   // E - setup checkboxes
   // set onclicks of our checkboxes to modify values of drawParams object
+
+  
   document.querySelector("#cb-bars").onclick = function (e) {
     drawParams.showBars = e.target.checked;
   };

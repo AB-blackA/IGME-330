@@ -120,10 +120,6 @@ function setupUI(canvasElement) {
     drawParams.showNoise = e.target.checked;
   };
 
-  document.querySelector("#cb-bars").checked = true;
-  document.querySelector("#cb-circles").checked = true;
-  document.querySelector("#cb-gradient").checked = true;
-  document.querySelector("#cb-noise").checked = false;
 } // end setupUI
 
 function loop() {

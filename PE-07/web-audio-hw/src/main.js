@@ -12,13 +12,19 @@ import * as audio from './audio.js';
 
 // 1 - here we are faking an enumeration
 const DEFAULTS = Object.freeze({
-  sound1: "media/New Adventure Theme.mp3"
+  sound1: "media/New Adventure Theme.mp3",
+  sound2: "media/Peanuts Theme.mp3",
+  sound3: "media/The Picard Song.mp3"
 });
 
 function init() {
   console.log("init called");
   console.log(`Testing utils.getRandomColor() import: ${utils.getRandomColor()}`);
   audio.setupWebaudio(DEFAULTS.sound1);
+
+  //ensure intial state of dropdown is per assignment instructions, new adventure theme
+  document.querySelector("#trackSelect").value = "media/New Adventure Theme.mp3";
+  
   let canvasElement = document.querySelector("canvas"); // hookup <canvas> element
   setupUI(canvasElement);
   loop();
@@ -85,7 +91,7 @@ function setupUI(canvasElement) {
   let trackSelect = document.querySelector("#trackSelect");
   // add .onchange event to <select>
   trackSelect.onchange = e => {
-    audio.loadSoundFile(E.target.value);
+    audio.loadSoundFile(e.target.value);
     // pause the current track if it is playing
     if (playButton.dataset.playing == "yes") {
       playButton.dispatchEvent(new MouseEvent("click"));

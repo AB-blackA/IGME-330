@@ -21,7 +21,9 @@ const drawParams = {
 
 // 1 - here we are faking an enumeration
 const DEFAULTS = Object.freeze({
-  sound1: "media/New Adventure Theme.mp3"
+  sound1: "media/New Adventure Theme.mp3",
+  sound2: "media/Peanuts Theme.mp3",
+  sound3: "media/The Picard Song.mp3"
 });
 
 function init() {
@@ -32,7 +34,9 @@ function init() {
   setupUI(canvasElement);
   canvas.setupCanvas(canvasElement, audio.analyserNode);
 
-  
+  //ensure intial state of dropdown is per assignment instructions, new adventure theme
+  document.querySelector("#trackSelect").value = "media/New Adventure Theme.mp3";
+
   //ensure initial state of cb's are what the assignment asks for
   document.querySelector("#cb-noise").checked = drawParams.showNoise;
   document.querySelector("#cb-bars").checked = drawParams.showBars;
@@ -103,7 +107,7 @@ function setupUI(canvasElement) {
   let trackSelect = document.querySelector("#trackSelect");
   // add .onchange event to <select>
   trackSelect.onchange = e => {
-    audio.loadSoundFile(E.target.value);
+    audio.loadSoundFile(e.target.value);
     // pause the current track if it is playing
     if (playButton.dataset.playing == "yes") {
       playButton.dispatchEvent(new MouseEvent("click"));
@@ -120,7 +124,7 @@ function setupUI(canvasElement) {
   document.querySelector("#cb-circles").onclick = function (e) {
     drawParams.showCircles = e.target.checked;
   };
-  
+
   document.querySelector("#cb-gradient").onclick = function (e) {
     drawParams.showGradient = e.target.checked;
   };

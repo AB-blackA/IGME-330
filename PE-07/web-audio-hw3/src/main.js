@@ -36,6 +36,9 @@ function init() {
   setupUI(canvasElement);
   canvas.setupCanvas(canvasElement, audio.analyserNode);
 
+  //ensure intial state of dropdown is per assignment instructions, new adventure theme
+  document.querySelector("#trackSelect").value = "media/New Adventure Theme.mp3";
+
   //ensure initial state of cb's are what the assignment asks for
   document.querySelector("#cb-noise").checked = drawParams.showNoise;
   document.querySelector("#cb-bars").checked = drawParams.showBars;
@@ -108,7 +111,7 @@ function setupUI(canvasElement) {
   let trackSelect = document.querySelector("#trackSelect");
   // add .onchange event to <select>
   trackSelect.onchange = e => {
-    audio.loadSoundFile(E.target.value);
+    audio.loadSoundFile(e.target.value);
     // pause the current track if it is playing
     if (playButton.dataset.playing == "yes") {
       playButton.dispatchEvent(new MouseEvent("click"));

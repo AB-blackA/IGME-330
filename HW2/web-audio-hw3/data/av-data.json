@@ -1,0 +1,24 @@
+{
+    "Title": "Audio Visualizer",
+    "Tracks": [
+        "New Adventure Theme",
+        "Peanuts Theme",
+        "The Picard Song"
+    ],
+    "Track Locations": [
+        "media/New Adventure Theme.mp3",
+        "media/Peanuts Theme.mp3",
+        "media/The Picard Song.mp3"
+    ],
+    "Params Truth Table": [
+        "showGradient: true",
+        "showBars: true",
+        "showCircles: true",
+        "showNoise: false",
+        "showInvert: false",
+        "showEmboss: false",
+        "showLowshelf: false",
+        "showHighshelf: false",
+        "selectFrequency: true"
+    ]
+}

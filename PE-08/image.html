@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Canvas Image Demo</title>
+	<style>
+		canvas{
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+<canvas width="600" height="600"></canvas>
+
+<script>
+	const imageURL = "https://www.rit.edu/marketing/brandportal/images/1505/brand-elements/identity/3-color-white.png";
+
+	preloadImage(imageURL,init); 	
+
+	// simple pre-loader that loads 1 image
+	// Hey - why don't you rewrite this to handle an *array* of images! :-)
+	// preloadImage(imageURL,callbackFunc);
+	function preloadImage(url,callback){
+		// 1 - create a new Image object
+		let img = new Image();
+		
+		// 2 - set up event handlers for the Image object
+		img.onload = () => {
+		  // 4 - when the image shows up, call `init(img)`
+		  callback(img)
+		};
+	
+		img.onerror = _=>{
+		  // 4B - called if there is an error
+		  console.log(`Image at url "${url}" wouldn't load! Check your URL!`);
+		};
+	
+		// 3 - start downloading the image (it is located on an RIT server)
+	        img.src = url;
+	}
+	
+	function init(img){
+			let ctx = document.querySelector("canvas").getContext("2d");
+			ctx.fillStyle = "yellow";
+			ctx.fillRect(0,0,600,600);
+			
+			// 1 - ctx.drawImage(image, dx, dy); // dx = "destination x"
+			//ctx.drawImage(img,0,0);
+			
+			// 2 - ctx.drawImage(image, dx, dy, dWidth, dHeight); 
+			// use dWidth and dHeight to scale the Image
+			// / ctx.drawImage(img,0,0,240,240);
+				
+			// 3 - ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+			// use sx, sy, sWidth, sHeight to sample just part of the image
+			// ctx.drawImage(img, 225, 100, 50, 30, 20, 20, 50, 30);
+			
+			// 4 - loop and draw!
+			//ctx.translate(150,65);
+			//for(let i=0;i<55;i++){
+			//	ctx.drawImage(img, 225, 100, 50, 30, -50, -50, 100, 60);
+			//	ctx.translate(110-i*2,0);
+			//	ctx.rotate(Math.PI/10);
+			//	ctx.scale(.95,.95);
+			//}
+	}
+</script>
+</body>
+</html>

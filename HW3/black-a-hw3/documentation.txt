@@ -1,0 +1,24 @@
+Added Nodes
+Added the suggested Bass and Treble nodes to the visualizer
+
+Added Sprites
+Added two classes, Square and Triangle, to the canvas.js file. They both draw (as expected) squares and triangles to the canvas. 
+They do so in a similar fashion to the circles, in that they “pulsate” with the audio based on the byte values of the audio data.
+
+JSON
+Added the required title, track information, and metadata (i.e., both the track locations and their names). In addition, added 
+information for the default state of the checkboxes and the visualizer selection (frequency or waveform)
+
+Aesthetics
+
+I added visualization effects for both of the added Bass and Trebles nodes to the canvas (both bars, either overlapping with the 
+bars we made or added to the top of the visualizer). In addition, I changed the gradient (per requested) to be less obtrusive to 
+the visualizer. Finally, I added functionality for my newly added Sprites that gives the user the ability to turn them on and off 
+(checkboxes).
+
+Overall I felt as though I put a lot of work into the functionality, but I admit I would not be incredibly eager to put this on my
+portfolio. I tried messing with some other things but simply wasn’t happy with the end result, so I omitted those changes (mostly 
+messing with randomization and changing the default circles). I’m self rating myself somewhere in the middle. I actually really 
+liked the visualizer for the most part with all its options before, so I didn’t omit any. 
+My score: 8%
+

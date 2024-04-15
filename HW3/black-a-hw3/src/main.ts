@@ -81,9 +81,8 @@ const init = () => {
     canvas.setupCanvas(canvasElement, audio.analyserNode);
 
     
-    // Ensure initial state of dropdown is per assignment instructions, new adventure theme
+    // Ensure initial state of dropdown 
     (document.querySelector("#track-select") as HTMLSelectElement).value = trackLocations[0];
-
     // Set default visualizer
     (document.querySelector("#visualizer-select") as HTMLSelectElement).value = startingVisualizerSelection;
     // Set title 
@@ -129,7 +128,7 @@ const loadXmlXHR = (callback: () => void) => {
     });
 
     // Set other vars equal to JSON values
-    startingVisualizerSelection = json['Starting Visualizer State'];
+    startingVisualizerSelection = json['Default Visualizer State'];
     title = json['Title'];
 
     // Set the checked property of checkboxes based on drawParams values

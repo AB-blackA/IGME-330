@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.js"
+        integrity="sha512-o1yFsi2kuKpw+gYcRZ2wqM+nolBeFrGEZCBsroxwbw9jZhFsacJSWCphWzApZ0x7ZKQJLTaook5vyJdBFUmumw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        footer {
+            color: darkgray;
+        }
+    </style>
+    <title>React starter with a CDN</title>
+</head>
+
+<body>
+    <!-- We will render the `App` component here -->
+    <div id="root"></div>
+
+    <!-- Note `type="text/babel"` -->
+    <script type="text/babel">
+
+        // `Header` component
+        // Simple "one liner" function component that returns a <header>
+        const Header = () => <header><h1>Famous Tigers</h1></header>;
+
+        // `Footer` component
+        // This utilizes a `year` attribute that is passed in when the component is created
+        // note the explicit `return` and the required use of parens to "wrap" the JSX
+        const Footer = props => {
+            return (
+                <footer>
+                    <p>&copy; {props.year} {props.name}</p>
+                </footer>
+            );
+        };
+
+        const Image = ({ src, altText, height }) => {
+
+            return <img height={height} src={src} alt={altText} />
+
+        }
+
+        const List = ({ list }) => {
+            return 
+            <ul>
+                {list.map((obj) => (
+                    <li key={obj.id}>
+                        {obj.title}
+                    </li>
+                ))}
+            </ul>
+        }
+        // `Main` component
+        // Note the required `key` attribute added to the `<li>` elements below
+        // https://react.dev/learn/rendering-lists#keeping-list-items-in-order-with-key
+        const Main = props => {
+            return (
+                <main>
+                    <Image
+                        height={150}
+                        src={props.url}
+                        altText="ROAR!!"
+                    />
+
+                    <List list={tigerObjects} />
+                </main>
+            );
+        };
+
+        // Some data
+        const imageURL = "https://www.rit.edu/marketing/brandportal/images/1505/brand-elements/identity/3-color-white.png";
+
+        // https://en.wikipedia.org/wiki/List_of_fictional_big_cats_in_animation
+        const tigerNames = [
+            "Aslan",
+            "Battle Cat",
+            "Cringer",
+            "Mufasa",
+            "Nala",
+            "Snagglepuss"
+        ];
+
+        // Associate an `id` with each tiger name
+        // which React needs for a `key` value when rendering a list 
+        // FYI - https://dev.to/shiv1998/why-not-to-use-index-as-key-in-react-lists-practical-example-3e66
+        const tigerObjects = tigerNames.map(
+            (name, index) => ({
+                id: index,
+                title: name
+            })
+        );
+
+        // `App` component
+        // App will contain all of the other components
+        // `<>` is used as a generic "wrapper" for all the elements - https://react.dev/reference/react/Fragment
+        // The attribute values we pass into each component show up in the 
+        // `props` parameter of each component, as properties of the `props` object
+        const App = () => {
+            return (
+                <>
+                    <Header />
+                    <Main
+                        tigerObjects={tigerObjects}
+                        url={imageURL}
+                    />
+                    <Footer
+                        year={new Date().getFullYear()}
+                        name="Ace Coder"
+                    />
+                </>
+            );
+        };
+
+        // Finally, render the `App` component and inject the HTML into #root
+        // Newer way: 
+        // - https://react.dev/reference/react-dom/client/createRoot
+        // - https://react.dev/reference/react-dom/client/createRoot#root-render
+        // Older way:
+        // - https://legacy.reactjs.org/docs/react-dom.html#render
+
+        const root = ReactDOM.createRoot(document.querySelector("#root"));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>

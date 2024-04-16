@@ -1,0 +1,27 @@
+{
+    "Title": "Audio Visualizer",
+    "Tracks": [
+        "New Adventure Theme",
+        "Peanuts Theme",
+        "The Picard Song"
+    ],
+    "Track Locations": [
+        "media/Andy Shauf - I Don't Really.mp3",
+        "media/JJ DOOM - Bookfiend (Clams Casino Version).mp3",
+        "media/TOOL - The Pot.mp3"
+    ],
+    "Params Truth Table": [
+        "showGradient: true",
+        "showBars: true",
+        "showCircles: true",
+        "showTriangles: true",
+        "showSquares: true",
+        "showNoise: false",
+        "showInvert: false",
+        "showEmboss: false",
+        "showLowshelf: false",
+        "showHighshelf: false",
+        "selectFrequency: true"
+    ],
+    "Default Visualizer State" : "frequency"
+}

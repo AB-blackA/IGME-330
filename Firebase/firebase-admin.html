@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Firebase Admin</title>
+</head>
+
+<body>
+    <h1>High Scores</h1>
+    <ul id="scoresList">
+        <li>No data yet!</li>
+    </ul>
+
+    <script type="module">
+        /* #1 - The Firebase setup code goes here  - both imports, `firebaseConfig` and `app` */
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBeScVEZw-RNfnW3-b5Yz99uZdsQ1DDThY",
+            authDomain: "high-scores-2f62a.firebaseapp.com",
+            projectId: "high-scores-2f62a",
+            storageBucket: "high-scores-2f62a.appspot.com",
+            messagingSenderId: "1062774776908",
+            appId: "1:1062774776908:web:97bd800ea549236314c0e9"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        console.log(app); // make sure firebase is loaded
+
+
+
+        // #2 NEW STUFF
+        const db = getDatabase();
+        const scoresRef = ref(db, 'scores');
+
+        const scoresChanged = (snapshot) => {
+
+            //clear the innerHTML (so it doesn't say "no data")
+            const scoreList = document.querySelector("#scoresList");
+            scoreList.innerHTML = '';
+
+            snapshot.forEach(score => {
+                const childKey = score.key;
+                const childData = score.val();
+                console.log(childKey, childData);
+
+                //for each item, make it into a list item and append it
+                //childData is held on firebase - it's basically an object with data.
+                const listItem = document.createElement('li');
+                listItem.textContent = `${childData.userId} - ${childData.game} - ${childData.score}`;
+                scoreList.appendChild(listItem);
+            });
+        }
+
+        onValue(scoresRef, scoresChanged);
+
+
+
+    </script>
+</body>
+
+</html>

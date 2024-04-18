@@ -1,0 +1,7 @@
+button[data-playing="yes"]:after {
+  content: "Pause";
+}
+
+button[data-playing="no"]:after {
+  content: "Play";
+}

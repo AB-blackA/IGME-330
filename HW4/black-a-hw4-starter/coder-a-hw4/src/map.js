@@ -58,7 +58,7 @@ const addMarker = (feature, className, clickHandler) => {
 	const html = `
 	<b>${feature.properties.title}</b>
 	<p>${feature.properties.address}</p>
-	<p>Phone: ${feature.properties.phone}</p>
+	<p><strong>Phone: </strong>${feature.properties.phone}</p>
 	`;
 
 	// C. Make the marker, add a popup, and add to map
@@ -96,4 +96,13 @@ const setPitchAndBearing = (pitch = 0, bearing = 0) => {
 	map.setBearing(bearing);
 };
 
-export { initMap, flyTo, setZoomLevel, setPitchAndBearing };
+const addMarkersToMap = (json, clickHandler) => {
+	geojson = json; // replace the default hard-coded JSON data
+
+	// loop through the features array and for each one add a marker to the map
+	for (const feature of geojson.features) {
+		addMarker(feature, "poi", clickHandler);
+	}
+}
+
+export { initMap, flyTo, setZoomLevel, setPitchAndBearing, addMarkersToMap };

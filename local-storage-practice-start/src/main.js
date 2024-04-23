@@ -18,6 +18,7 @@ const showItems = () => {
 // - this will add `str` to the `items` array (so long as `str` is length greater than 0)
 const addItem = str => {
   
+  //only push items that aren't blank
   if(str.length > 0){
     items.push(str);
   }
@@ -29,17 +30,25 @@ const addItem = str => {
 // - and be sure to update .localStorage by calling `writeToLocalStorage("items",items)`
 document.querySelector("#btn-add").addEventListener("click", () => {
   const input = document.querySelector("#thing-text");
+
+  //add to array
   addItem(input.value);
+
+  //reset input to be blank
   input.value = "";
   showItems();
+
+  //add to storage
   storage.writeToLocalStorage("items", items);
 });
 
 document.querySelector("#btn-clear").addEventListener("click", () => {
     items = [];
     showItems();
-    StorageEvent.writeToLocalStorage("items", items);
-})
+
+    //remove from storage
+    storage.writeToLocalStorage("items", items);
+});
 
 // When the page loads:
 // - load in the `items` array from storage.js and display the current items
@@ -48,9 +57,15 @@ document.querySelector("#btn-clear").addEventListener("click", () => {
 // ... and if you didn't, set `items` to an empty array
 
 items = storage.readFromLocalStorage("items");
+
+//failsafe if json doesn't work or somehow we are saving things as not an array
+//in localstorage
 if(!Array.isArray(items)){
   items = [];
 }
+
+//call showItems, to display the saved items (if they exist)
+showItems();
 
 // Got it working? 
 // - Add a "Clear List" button that empties the items array

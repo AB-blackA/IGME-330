@@ -1,5 +1,11 @@
+/* Author: Professor Andrew Wheeland (note from student Andrew Black, I just followed his tutorial!)
+ * Since: unknown, utilized by Andrew Black 4/24/24
+ * File: storage.js
+ * Purpose: storage.js is all about using local storage to work with park related data in our main application 
+ * NOTE: all comments by Professor Wheeland himself
+ */
+
 // a private (to this module) unique name to store the app data under
-// if you put this on banjo, change `abc1234` to your banjo account name
 const storeName = "acb7086-list-app";
 
 // a private (to this module) helper function

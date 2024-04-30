@@ -1,4 +1,10 @@
-
+/* Author: Professor Andrew Wheeland (note from student Andrew Black, I just followed his tutorial!)
+ * Since: unknown, utilized by Andrew Black 4/24/24
+ * File: map.js
+ * Purpose: map.js is responsible for a myriad of functions related to the map displayed on the main html page.
+ * This includes defining the data for our parks and setting some pop-up boxes with information about the park
+ * NOTE: most comments are by Professor Wheeland himself. Any comments by Andrew Black will be denoted with a ~AB at the end
+ */
 
 // I. Variables & constants
 const accessToken = 'pk.eyJ1IjoiYWNiNzA4NiIsImEiOiJjbHVrMDRyejIwM2hsMmttbDM0dzNhZjAyIn0.Apls0ta6B4m6t86DuSGTxQ';
@@ -29,9 +35,16 @@ let geojson = {
 };
 
 // II. "private" - will not be exported
+
+/* initMap: creates the map from Mapbox, to be used on index.html
+ * Params: center: data defining the center of the map, or the "load-in point"
+ * ~AB
+ */
 const initMap = (center) => {
 	mapboxgl.accessToken = accessToken;
 
+	//creation of the map. note that container is specific to a map object and the zoom was defined from the tutorial
+	//~AB
 	map = new mapboxgl.Map({
 		container: "map",
 		style: "mapbox://styles/mapbox/light-v11",
@@ -46,6 +59,11 @@ const initMap = (center) => {
 	addMarker(geojson.features[0], "poi", clickHandler); */
 };
 
+/* addMarker: creates an interactible marker for each Park we have defined, and adds it to the map (via a div)
+ * Params: feature - feature is defined in the json, it's essentially a point of data relating to a park.
+ * className - css defining features of the marker; clickHandler - the defined onclick event which occurs upon clicking the marker
+ * ~AB
+ */
 const addMarker = (feature, className, clickHandler) => {
 
 	// A. Create a map marker using feature (i.e., "Park") data
@@ -80,16 +98,29 @@ const addMarker = (feature, className, clickHandler) => {
 }
 
 // III. "public" - will be exported
+
+/* flyTo: function that changes the viewpoint of the map to the passed in parameter
+ * Params: center - the point to "zoom in on" (DEFAULT: 0,0)
+ * ~AB
+ */
 const flyTo = (center = [0, 0]) => {
 	//https://docs.mapbox.com/mapbox-gl-js/api/#map#flyto
 	map.flyTo({ center: center });
 };
 
+/* setZoomLevel: function that changes the zoom of the currently defined point of view on the map
+ * Params: value - the defined zoom in value (DEFAULT: 0)
+ * ~AB
+ */
 const setZoomLevel = (value = 0) => {
 	// https://docs.mapbox.com/help/glossary/zoom-level/
 	map.setZoom(value);
 };
 
+/* setZoomLevel: function that changes the pitch and bearing (angle, essentially) of the currently defined point of view on the map
+ * Params: pitch - the verticle angle of the map view (DEFAULT: 0); bearing - the horizontal angle of the map view (DEFAULT: 0)
+ * ~AB
+ */
 const setPitchAndBearing = (pitch = 0, bearing = 0) => {
 	// https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/
 	// https://docs.mapbox.com/mapbox-gl-js/example/set-perspective/
@@ -97,6 +128,10 @@ const setPitchAndBearing = (pitch = 0, bearing = 0) => {
 	map.setBearing(bearing);
 };
 
+/* setZoomLevel: helper function that calls addMarker - to be called when main.js is ready to utilize it
+ * Params: json - the json data that contains park information; clickHandler - the onclick event that each marker will utilize
+ * ~AB
+ */
 const addMarkersToMap = (json, clickHandler) => {
 	geojson = json; // replace the default hard-coded JSON data
 

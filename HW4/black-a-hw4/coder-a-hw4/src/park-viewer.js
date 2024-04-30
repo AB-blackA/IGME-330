@@ -128,7 +128,7 @@ const favoritesChanged = (snapshot) => {
             if (childData.favorites != 0) {
                 //update the UI
                 //~AB
-                favoritesList.innerHTML += `<li><b>${childData.name}: ID ${childData.id}</b> - Favorites: ${childData.favorites}</li>`;
+                favoritesList.innerHTML += `<li class="is-size-5"><b>${childData.name}: ID ${childData.id}</b> - Favorites: ${childData.favorites}</li>`;
             }
         });
     }catch (TypeError){
